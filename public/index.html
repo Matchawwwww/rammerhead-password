@@ -1,7 +1,44 @@
 <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パスコード認証</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        #password-form {
+            margin: 50px auto;
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #content-area {
+            display: none; /* 初期状態では非表示 */
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        #message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-form">
+        <h1>パスコード認証</h1>
+        <label for="password">パスコード:</label>
+        <input type="password" id="password">
+        <button onclick="checkPassword()">認証</button>
+        <p id="message"></p>
+    </div>
 
-<html>
-
+    <div id="content-area">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -79,5 +116,23 @@
         </table>
     </div>
 </body>
+<script>
+        const correctPassword = '2009'; // ★ 実際のパスワードを設定してください
+        const passwordForm = document.getElementById('password-form');
+        const contentArea = document.getElementById('content-area');
+        const messageElement = document.getElementById('message');
 
+        function checkPassword() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.value === correctPassword) {
+                passwordForm.style.display = 'none';
+                contentArea.style.display = 'block';
+                messageElement.innerText = '';
+            } else {
+                messageElement.innerText = 'パスコードが間違っています。';
+            }
+            passwordInput.value = ''; // 入力欄をクリア
+        }
+    </script>
+</body>
 </html>
